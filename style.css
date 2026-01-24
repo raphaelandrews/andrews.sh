@@ -8,11 +8,11 @@
 body {
   font-family: "04b_03";
   font-size: 14px;
-  color: white;
-  text-shadow: 0 0 20px #ffffff4a;
+  color: #cdd6f4;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   image-rendering: pixelated;
   background-color: black;
-  background-image: url("images/sunsetwave-1.webp");
+  background-image: url("images/bluecore.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -29,12 +29,10 @@ body::before {
   right: 0;
   height: 100vh;
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       rgba(255, 0, 0, 0.06),
       rgba(0, 255, 0, 0.02),
-      rgba(0, 0, 255, 0.06)
-    );
+      rgba(0, 0, 255, 0.06));
   z-index: 2;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
@@ -59,21 +57,21 @@ h1 {
   font-size: 64px;
   text-align: center;
   line-height: 1em;
-  color: #f5a97f;
+  color: #cba6f7;
   margin: 32px 0 20px;
 }
 
 h2 {
   font-size: 28px;
   font-weight: bold;
-  color: #f5a97f;
+  color: #cba6f7;
   margin: 0;
 }
 
 h3 {
   font-size: 20px;
   font-weight: normal;
-  color: #f5a97f;
+  color: #cba6f7;
   margin: 0;
 }
 
@@ -323,6 +321,7 @@ textarea {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
