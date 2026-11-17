@@ -147,20 +147,18 @@ function CurrentlyPlaying(data) {
         notPlayingTitle.innerHTML = 'Currently Playing';
         spotifySection.appendChild(notPlayingTitle);
 
-        var notPlayingHtml = `
-            <div id="vinyl-container-main" class="vinyl-container">
-                <div class="vinyl-record">
-                    <div class="vinyl-record-background">
-                        <div class="vinyl-record-groove"></div>
-                        <div class="vinyl-record-center-hole"></div>
-                    </div>
-                    <div class="album-cover">
-                        <!-- Empty when no music is playing -->
-                    </div>
-                </div>
-                <p>Not currently playing anything on Spotify.</p>
-            </div>
-        `;
+        var notPlayingHtml = '<div id="vinyl-container-main" class="vinyl-container">' +
+            '<div class="vinyl-record">' +
+            '<div class="vinyl-record-background">' +
+            '<div class="vinyl-record-groove"></div>' +
+            '<div class="vinyl-record-center-hole"></div>' +
+            '</div>' +
+            '<div class="album-cover">' +
+            '<!-- Empty when no music is playing -->' +
+            '</div>' +
+            '</div>' +
+            '<p>Not currently playing anything on Spotify.</p>' +
+            '</div>';
         spotifySection.innerHTML += notPlayingHtml;
     }
 }
@@ -206,10 +204,8 @@ function RecentlyPlayed(isRightTd) {
             spotifySection.innerHTML += '<p>No valid track data found</p>';
         }
     } else {
-        var notPlayingHtml = `
-            <h3>Recently Played</h3>
-            <p>No recently played tracks found.</p>
-        `;
+        var notPlayingHtml = '<h3>Recently Played</h3>' +
+            '<p>No recently played tracks found.</p>';
         spotifySection.innerHTML += notPlayingHtml;
     }
 }
@@ -225,8 +221,15 @@ function getSpotifyData(endpoint) {
             return null;
         }
     } catch (e) {
-        if (spotifySection) {
-            spotifySection.innerHTML = '<div class="error"><h3>Error loading Spotify data</h3><p><strong>Error:</strong> Network Error</p><p><strong>Troubleshooting steps:</strong></p><ul><li>1. Ensure your server is running on the same origin as this page (' + window.location.origin + ')</li><li>2. Check that your Spotify API credentials are configured</li><li>3. Verify CORS is enabled on your server</li><li>4. Check the browser console for more details</li></ul></div>';
+        var errorSections = {
+            'currently-playing': 'spotify-data-music',
+            'recently-played': 'spotify-data-music',
+            'top-artists': 'spotify-data-top-artists',
+            'top-tracks': 'spotify-data-top-tracks'
+        };
+        var errorSection = document.getElementById(errorSections[endpoint]);
+        if (errorSection) {
+            errorSection.innerHTML = '<div class="error"><h3>Error loading Spotify data</h3><p><strong>Error:</strong> Network Error</p><p><strong>Troubleshooting steps:</strong></p><ul><li>1. Ensure the API is reachable at ' + window.location.origin + '</li><li>2. Check that your Spotify API credentials are configured</li><li>3. Check the browser console for more details</li></ul></div>';
         }
         return null;
     }
@@ -301,7 +304,9 @@ function generateSlantedRectanglesForButtons() {
     var rectanglesPerColumn = 8;
     var currentColumn = null;
 
-    imageButtonIds.forEach((buttonId, index) => {
+    for (var index = 0; index < imageButtonIds.length; index++) {
+        var buttonId = imageButtonIds[index];
+
         if (index % rectanglesPerColumn === 0) {
             currentColumn = document.createElement("div");
             currentColumn.className = "slanted-rectangle-column";
@@ -311,17 +316,17 @@ function generateSlantedRectanglesForButtons() {
         var rectangle = document.createElement("div");
         var columnIndex = Math.floor(index / rectanglesPerColumn);
         rectangle.className = (columnIndex % 2 === 0) ? "slanted-rectangle-flip" : "slanted-rectangle";
-        rectangle.id = `slanted-rectangle-${index}`;
-        rectangle.dataset.buttonId = buttonId;
+        rectangle.id = "slanted-rectangle-" + index;
+        rectangle.setAttribute("buttonid", buttonId);
         rectangle.onclick = function () { handleSlantedRectangleClick(rectangle.id); };
         currentColumn.appendChild(rectangle);
         buttonStates[buttonId] = { active: true, originalElement: null };
-    });
+    }
 }
 
 function handleSlantedRectangleClick(slantedRectangleId) {
     var slantedRectangle = document.getElementById(slantedRectangleId);
-    var buttonId = slantedRectangle.dataset.buttonId;
+    var buttonId = slantedRectangle.getAttribute("buttonid");
     var currentButtonElement = document.getElementById(buttonId);
 
     if (slantedRectangle && currentButtonElement) {

@@ -1,0 +1,14 @@
+# Spotify credentials – used as Worker secrets in production.
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+SPOTIFY_REFRESH_TOKEN=
+
+# Set to true to serve bundled mock data instead of calling Spotify.
+MOCK_SPOTIFY=false
+
+# Redirect URI used by `npm run auth`; register the same value in the Spotify app.
+SPOTIFY_REDIRECT_URI=http://127.0.0.1:8888/callback
+
+# Optional: Last.fm "recently scrobbled" widget on the music page.
+LASTFM_API_KEY=
+LASTFM_USER=

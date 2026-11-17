@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>andrews.sh journal</title>
+    <link>https://andrews.sh/journal.html</link>
+    <description>Site updates, tiny victories and things I broke on purpose.</description>
+    <language>en</language>
+    <lastBuildDate>Mon, 16 Nov 2026 12:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>moved to Cloudflare and added everything</title>
+      <link>https://andrews.sh/journal.html#2026-11-16</link>
+      <guid>https://andrews.sh/journal.html#2026-11-16</guid>
+      <pubDate>Mon, 16 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Moved the whole site to Cloudflare Workers and added guestbook, shoutbox, poll, hit counter, virtual pet, a quiz, a fake webcam, wallpapers and approximately one million links.</description>
+    </item>
+
+    <item>
+      <title>Spotify token rotation</title>
+      <link>https://andrews.sh/journal.html#2026-11-15</link>
+      <guid>https://andrews.sh/journal.html#2026-11-15</guid>
+      <pubDate>Sun, 15 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Spotify refresh tokens now expire every six months. Rotated ours, wrote a little auth helper, and added a clearer error message for when it happens again.</description>
+    </item>
+
+    <item>
+      <title>vinyl record widgets</title>
+      <link>https://andrews.sh/journal.html#2026-10-02</link>
+      <guid>https://andrews.sh/journal.html#2026-10-02</guid>
+      <pubDate>Fri, 02 Oct 2026 12:00:00 +0000</pubDate>
+      <description>Added the vinyl record widgets for currently playing, top artists and top tracks. They spin. That is the whole feature.</description>
+    </item>
+
+    <item>
+      <title>cybercore redesign</title>
+      <link>https://andrews.sh/journal.html#2024-08-12</link>
+      <guid>https://andrews.sh/journal.html#2024-08-12</guid>
+      <pubDate>Mon, 12 Aug 2024 12:00:00 +0000</pubDate>
+      <description>Redesigned the site around the cybercore palette: black, purple, neon green, tiled star background, scanlines.</description>
+    </item>
+
+    <item>
+      <title>site opened</title>
+      <link>https://andrews.sh/journal.html#2003-06-01</link>
+      <guid>https://andrews.sh/journal.html#2003-06-01</guid>
+      <pubDate>Sun, 01 Jun 2003 12:00:00 +0000</pubDate>
+      <description>Site opened. Hello, world. Guestbook installed. Hit counter reset to zero for the hundredth time.</description>
+    </item>
+  </channel>
+</rss>

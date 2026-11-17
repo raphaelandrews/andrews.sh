@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>quiz — andrews.sh</title>
+  <meta name="description" content="Which Evangelion character are you?" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.svg" />
+</head>
+
+<body>
+  <div id="retro-nav"></div>
+
+  <div id="page">
+    <div class="page-box">
+      <h1>which evangelion character are you?</h1>
+      <p>
+        a scientific quiz with five questions and no psychology. answer honestly
+        or do not; the result is equally meaningless.
+      </p>
+
+      <form onsubmit="return submitQuiz();">
+        <div class="quiz-question">
+          <strong>1. someone asks how you are. you say:</strong>
+          <label><input type="radio" name="q1" value="shinji" /> "i'm fine." (you are not)</label>
+          <label><input type="radio" name="q1" value="asuka" /> "obviously better than you."</label>
+          <label><input type="radio" name="q1" value="rei" /> "..."</label>
+          <label><input type="radio" name="q1" value="misato" /> "let's get dinner first."</label>
+        </div>
+
+        <div class="quiz-question">
+          <strong>2. ideal weekend:</strong>
+          <label><input type="radio" name="q2" value="shinji" /> avoiding everyone</label>
+          <label><input type="radio" name="q2" value="asuka" /> training alone, loudly</label>
+          <label><input type="radio" name="q2" value="rei" /> reading in silence</label>
+          <label><input type="radio" name="q2" value="misato" /> going out and regretting it</label>
+        </div>
+
+        <div class="quiz-question">
+          <strong>3. in an emergency you:</strong>
+          <label><input type="radio" name="q3" value="shinji" /> panic, then do it anyway</label>
+          <label><input type="radio" name="q3" value="asuka" /> yell and take over</label>
+          <label><input type="radio" name="q3" value="rei" /> calculate the odds</label>
+          <label><input type="radio" name="q3" value="misato" /> make a plan and a mess</label>
+        </div>
+
+        <div class="quiz-question">
+          <strong>4. your playlist is mostly:</strong>
+          <label><input type="radio" name="q4" value="shinji" /> sad songs at 3am</label>
+          <label><input type="radio" name="q4" value="asuka" /> punk and metal</label>
+          <label><input type="radio" name="q4" value="rei" /> ambient, no lyrics</label>
+          <label><input type="radio" name="q4" value="misato" /> city pop and beer</label>
+        </div>
+
+        <div class="quiz-question">
+          <strong>5. the point of it all is:</strong>
+          <label><input type="radio" name="q5" value="shinji" /> connecting with people, somehow</label>
+          <label><input type="radio" name="q5" value="asuka" /> proving you are worth it</label>
+          <label><input type="radio" name="q5" value="rei" /> understanding yourself</label>
+          <label><input type="radio" name="q5" value="misato" /> surviving, then a beer</label>
+        </div>
+
+        <button type="submit" style="margin-top: 8px; background: #222; color: #35ffb3; border: 2px outset #555; font-family: '04b_03'; font-size: 14px; padding: 4px 12px; cursor: pointer">see my result</button>
+      </form>
+
+      <div id="quiz-result"></div>
+
+      <p><a href="/">home</a> · <a href="/anime.html">anime page</a></p>
+    </div>
+  </div>
+
+  <div id="retro-footer"></div>
+  <script src="/retro.js"></script>
+  <script>
+    var QUIZ_RESULTS = {
+      shinji: {
+        title: 'you are shinji',
+        text: 'you are doing your best, which is more than you think. get in the robot. or do not. drink some water.',
+        image: '/images/gifs/evangelion.gif'
+      },
+      asuka: {
+        title: 'you are asuka',
+        text: 'you are loud because you care. your confidence is a shield and also a personality. keep it.',
+        image: '/images/gifs/evangelion3.gif'
+      },
+      rei: {
+        title: 'you are rei',
+        text: 'you are quiet, observant, and slightly mysterious. nobody knows what you are thinking. neither do you.',
+        image: '/images/gifs/eva00.gif'
+      },
+      misato: {
+        title: 'you are misato',
+        text: 'you get things done, make terrible jokes, and deserve a nap. the beer is optional.',
+        image: '/images/gifs/evangelion4.gif'
+      }
+    };
+
+    function submitQuiz() {
+      var scores = { shinji: 0, asuka: 0, rei: 0, misato: 0 };
+      var names = ['q1', 'q2', 'q3', 'q4', 'q5'];
+
+      for (var q = 0; q < names.length; q++) {
+        var inputs = document.getElementsByName(names[q]);
+        var picked = '';
+
+        for (var i = 0; i < inputs.length; i++) {
+          if (inputs[i].checked) {
+            picked = inputs[i].value;
+          }
+        }
+
+        if (!picked) {
+          alert('answer all five questions!');
+          return false;
+        }
+
+        scores[picked] = scores[picked] + 1;
+      }
+
+      var winner = 'shinji';
+      for (var key in scores) {
+        if (scores[key] > scores[winner]) {
+          winner = key;
+        }
+      }
+
+      var result = QUIZ_RESULTS[winner];
+      document.getElementById('quiz-result').innerHTML =
+        '<div class="quiz-result">' +
+        '<h2>' + result.title + '</h2>' +
+        '<img src="' + result.image + '" alt="' + result.title + '">' +
+        '<p>' + result.text + '</p>' +
+        '<p><small>scores: shinji ' + scores.shinji + ' · asuka ' + scores.asuka +
+        ' · rei ' + scores.rei + ' · misato ' + scores.misato + '</small></p>' +
+        '</div>';
+
+      return false;
+    }
+  </script>
+</body>
+
+</html>

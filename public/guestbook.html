@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>guestbook — andrews.sh</title>
+  <meta name="description" content="Sign the andrews.sh guestbook." />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.svg" />
+</head>
+
+<body>
+  <div id="retro-nav"></div>
+
+  <div id="page">
+    <div class="page-box">
+      <h1>guestbook</h1>
+      <p>
+        the guestbook is open. leave a message, a hello, a complaint about the
+        font size — anything. no HTML, no spam, no linkedin.
+      </p>
+
+      <form class="retro-form" onsubmit="return signGuestbook(this);">
+        <label for="gb-name">name</label>
+        <input type="text" id="gb-name" maxlength="40" />
+        <label for="gb-website">website (optional)</label>
+        <input type="text" id="gb-website" maxlength="200" />
+        <label for="gb-message">message</label>
+        <textarea id="gb-message" maxlength="800"></textarea>
+        <input type="text" name="url2" class="honeypot" tabindex="-1" autocomplete="off" />
+        <button type="submit">sign the guestbook</button>
+      </form>
+
+      <h2>entries</h2>
+      <div id="guestbook-entries">loading entries...</div>
+
+      <p><a href="/shoutbox.html">shoutbox</a> · <a href="/">home</a></p>
+    </div>
+  </div>
+
+  <div id="retro-footer"></div>
+  <script src="/retro.js"></script>
+  <script>
+    function loadGuestbook() {
+      var target = document.getElementById('guestbook-entries');
+      if (!target) {
+        return;
+      }
+
+      xhrGet('/api/guestbook', function (data) {
+        var entries = data && data.entries ? data.entries : [];
+        if (!entries.length) {
+          target.innerHTML = '<p>no entries yet. be the first!</p>';
+          return;
+        }
+
+        var html = '';
+        for (var i = 0; i < entries.length; i++) {
+          var entry = entries[i];
+          html += '<div class="gb-entry">' +
+            '<div class="gb-meta"><strong>' + escapeHtml(entry.name) + '</strong>';
+          if (entry.website) {
+            html += ' · <a href="' + escapeHtml(entry.website) + '" target="_blank">homepage</a>';
+          }
+          html += ' · ' + escapeHtml(entry.created_at) + '</div>' +
+            '<div class="gb-message">' + escapeHtml(entry.message) + '</div>' +
+            '</div>';
+        }
+        target.innerHTML = html;
+      });
+    }
+
+    function signGuestbook(form) {
+      var name = document.getElementById('gb-name').value;
+      var website = document.getElementById('gb-website').value;
+      var message = document.getElementById('gb-message').value;
+      var honeypot = form.elements.url2 ? form.elements.url2.value : '';
+
+      xhrPost('/api/guestbook', {
+        name: name,
+        website: website,
+        message: message,
+        url2: honeypot
+      }, function (data) {
+        if (data) {
+          document.getElementById('gb-name').value = '';
+          document.getElementById('gb-website').value = '';
+          document.getElementById('gb-message').value = '';
+          alert('thanks for signing!');
+          loadGuestbook();
+        } else {
+          alert('the guestbook is asleep. try again later.');
+        }
+      });
+
+      return false;
+    }
+
+    addOnload(loadGuestbook);
+  </script>
+</body>
+
+</html>

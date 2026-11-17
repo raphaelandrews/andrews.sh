@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>buttons — andrews.sh</title>
+  <meta name="description" content="88x31 buttons collected from the old web." />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.svg" />
+</head>
+
+<body>
+  <div id="retro-nav"></div>
+
+  <div id="page">
+    <div class="page-box">
+      <h1>buttons</h1>
+      <p>
+        the complete 88x31 collection. right-click, save as, and put them on your
+        own site. that is how the web worked.
+      </p>
+
+      <div class="construction">🚧 88x31 buttons · some are 88x31-ish · no refunds 🚧</div>
+
+      <div class="button-wall" id="button-wall">loading buttons...</div>
+
+      <h2>link to me</h2>
+      <p>save the button below and link back to <strong>andrews.sh</strong>.</p>
+      <p><img src="/images/buttons/site-button.png" alt="andrews.sh" /></p>
+      <textarea style="width: 100%; height: 60px; background: #000; color: #35ffb3; border: 1px solid #383838" readonly="">&lt;a href="https://andrews.sh/"&gt;&lt;img src="https://andrews.sh/images/buttons/site-button.png"&gt;&lt;/a&gt;</textarea>
+
+      <p><a href="/links.html">← back to links</a></p>
+    </div>
+  </div>
+
+  <div id="retro-footer"></div>
+  <script src="/retro.js"></script>
+  <script>
+    var BUTTON_FILES = [
+      '768-colors.gif', 'accessinu.gif', 'adobe-getflash.gif', 'animestation.gif',
+      'aol.gif', 'atari-2600.gif', 'best-enjoyed-cola.gif', 'best-viewned-pepsi.gif',
+      'blender.gif', 'cassette.gif', 'child.gif', 'coke.gif', 'dolby_digital.gif',
+      'dragons-now.jpg', 'eagamat2.gif', 'eva1.bmp', 'evangelion1.gif', 'firefox2.gif',
+      'firefox3.gif', 'free-internet-explorer.gif', 'free-msn.gif', 'freewareguide2.gif',
+      'gbanet.gif', 'gbc.gif', 'gc_icon3.gif', 'gc_tropics.gif', 'get-java.gif',
+      'getNshockwave.gif', 'getquake.gif', 'getwc.gif', 'github1.gif', 'github-check.gif',
+      'gohan.gif', 'hd3.gif', 'hl.gif', 'html-editor.gif', 'icq2.gif', 'icqbutton.gif',
+      'icq.gif', 'iecrash.gif', 'inuyasha2.jpg', 'mail-put.gif', 'neocities.gif',
+      'netscape.gif', 'netscape-now.gif', 'page-contains-js.png', 'pkmn.gif', 'pokemon.gif',
+      'portal.jpg', 'quicktime.gif', 'samuraix.gif', 'sanehtml.gif', 'saveanow.gif',
+      'site-button.png', 'sm_fever_button.gif', 'sm.jpg', 'source-powered.png',
+      'spacelink.gif', 'steam.gif', 'thedigitalme.gif', 'theoc.gif', 'tumblr.png',
+      'tv-color.gif', 'twitterbutton.gif', 'web-design-passion.gif', 'win98_891.gif',
+      'winamp.gif', 'winampmp.gif', 'winrar4.gif', 'winzip.gif', 'yahoo_mail.gif'
+    ];
+
+    function renderButtons() {
+      var target = document.getElementById('button-wall');
+      var html = '';
+      for (var i = 0; i < BUTTON_FILES.length; i++) {
+        html += '<img src="/images/buttons/' + BUTTON_FILES[i] + '" alt="' + BUTTON_FILES[i] + '" width="88" height="31">';
+      }
+      target.innerHTML = html;
+    }
+
+    addOnload(renderButtons);
+  </script>
+</body>
+
+</html>

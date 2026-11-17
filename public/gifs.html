@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gifs — andrews.sh</title>
+  <meta name="description" content="The complete GIF collection." />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="/favicon.svg" />
+</head>
+
+<body>
+  <div id="retro-nav"></div>
+
+  <div id="page">
+    <div class="page-box">
+      <h1>gif collection</h1>
+      <p>
+        every GIF on this site, in one place. animated, pixelated, occasionally
+        compressed into oblivion. exactly as it should be.
+      </p>
+
+      <div class="construction">🚧 bandwidth warning: this page is one big GIF 🚧</div>
+
+      <div class="gif-wall" id="gif-wall">loading gifs...</div>
+
+      <p><a href="/">← back home</a></p>
+    </div>
+  </div>
+
+  <div id="retro-footer"></div>
+  <script src="/retro.js"></script>
+  <script>
+    var GIF_FILES = [
+      'anime.gif', 'black-cat.gif', 'brazil-flag.gif', 'cn.gif', 'email.gif',
+      'eva00.gif', 'evangelion.gif', 'evangelion3.gif', 'evangelion4.gif',
+      'evangelion5.gif', 'from-dusk-till-down.gif', 'from-dusk-till-down1.gif',
+      'habbo.gif', 'habbo2.gif', 'hxh.gif', 'hxh2.gif', 'hxh3.gif',
+      'kimi-no-na-wa.gif', 'pirates-of-the-caribbean.gif',
+      'pirates-of-the-caribbean2.gif', 'princess-mononoke.gif', 'resident-evil.gif',
+      'rey.gif', 'sailor-moon-cat.gif', 'sailor-moon-cat-2.gif', 'spirited-away.gif',
+      'starcraft.gif', 'starcraft2.gif', 'starcraft3.gif', 'twitter-heart.gif',
+      'vaporwave-1.gif', 'warfcraft.gif'
+    ];
+
+    function captionFor(file) {
+      return file.replace('.gif', '').replace(/-/g, ' ');
+    }
+
+    function renderGifs() {
+      var target = document.getElementById('gif-wall');
+      var html = '';
+      for (var i = 0; i < GIF_FILES.length; i++) {
+        html += '<div class="gif-item">' +
+          '<img src="/images/gifs/' + GIF_FILES[i] + '" alt="' + captionFor(GIF_FILES[i]) + '">' +
+          '<div class="gif-caption">' + captionFor(GIF_FILES[i]) + '</div>' +
+          '</div>';
+      }
+      target.innerHTML = html;
+    }
+
+    addOnload(renderGifs);
+  </script>
+</body>
+
+</html>

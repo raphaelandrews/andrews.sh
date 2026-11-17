@@ -1,4 +1,6 @@
 node_modules
 .env
-.vercel
+.dev.vars
+.wrangler
 /.trae/
+.DS_Store
