@@ -8,14 +8,17 @@
 body {
   font-family: "04b_03";
   font-size: 14px;
-  color: #dcd6f7;
+  color: #FFC46B;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   image-rendering: pixelated;
   background-color: black;
-  background-image: url("images/stars-bg.gif");
-  background-attachment: fixed;
-  background-repeat: repeat;
-  background-size: auto;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("images/water.gif");
+  background-attachment: fixed, fixed;
+  background-repeat: no-repeat, repeat;
+  background-size: 100% 100%, auto;
+  background-position: center, 0 0;
   -webkit-font-smoothing: none;
 }
 
@@ -30,9 +33,9 @@ body::before {
   height: 100vh;
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
     linear-gradient(90deg,
-      rgba(255, 0, 0, 0.06),
-      rgba(0, 255, 0, 0.02),
-      rgba(0, 0, 255, 0.06));
+      rgba(0, 0, 0, 0.04),
+      rgba(0, 0, 0, 0.015),
+      rgba(0, 0, 0, 0.04));
   z-index: 2;
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
@@ -57,21 +60,41 @@ h1 {
   font-size: 64px;
   text-align: center;
   line-height: 1em;
-  color: #cba6f7;
+  color: #F76C91;
   margin: 32px 0 20px;
+}
+
+.welcome-banner {
+  margin: 24px 0 0;
+  line-height: 1;
+}
+
+.welcome-banner .palm {
+  font-size: 52px;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 8px #A77BC8);
+}
+
+.welcome-banner .welcome-text {
+  display: inline-block;
+  margin: 0 16px;
+  color: #F76C91;
+  text-shadow: 0 0 6px #A77BC8, 0 0 16px #F76C91, 4px 4px 0 #000000;
+  vertical-align: middle;
+  letter-spacing: 2px;
 }
 
 h2 {
   font-size: 28px;
   font-weight: bold;
-  color: #cba6f7;
+  color: #F76C91;
   margin: 0;
 }
 
 h3 {
   font-size: 20px;
   font-weight: normal;
-  color: #cba6f7;
+  color: #F76C91;
   margin: 0;
 }
 
@@ -106,9 +129,9 @@ td {
 }
 
 textarea {
-  background-color: black;
-  color: white;
-  border: 1px solid #3a3a5a;
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #514B87;
   font-family: MS Gothic, monospace;
   resize: none;
 }
@@ -176,10 +199,6 @@ textarea {
 }
 
 .wrapper {
-  /*background-color: #000000a8;
-  border: 2px solid #3a3a5a;
-  border-radius: 4px;
-  border-style: dotted;*/
   padding: 10px 15px;
   margin: 5px;
 }
@@ -211,7 +230,7 @@ textarea {
 .track-number,
 .artist-number {
   font-size: 30px;
-  color: #71717a;
+  color: #A77BC8;
   font-weight: 700;
   display: inline-block;
   width: 20px;
@@ -230,7 +249,7 @@ textarea {
 }
 
 .link-transition:hover {
-  color: #1db954;
+  color: #F76C91;
 }
 
 .vinyl-container {
@@ -337,7 +356,7 @@ textarea {
   position: relative;
   width: 80px;
   height: 20px;
-  background-color: #35ffb3;
+  background-color: #A77BC8;
   transform: skewX(25deg);
   rotate: 25deg;
   display: flex;
@@ -345,14 +364,14 @@ textarea {
   justify-content: flex-start;
   padding-left: 15px;
   box-sizing: border-box;
-  box-shadow: 0 0 8px 1px rgba(53, 255, 179, 0.7);
+  box-shadow: 0 0 8px 1px rgba(247, 108, 145, 0.7);
 }
 
 .slanted-rectangle-flip {
   position: relative;
   width: 80px;
   height: 20px;
-  background-color: #35ffb3;
+  background-color: #A77BC8;
   transform: skewX(-25deg);
   rotate: -25deg;
   display: flex;
@@ -360,7 +379,7 @@ textarea {
   justify-content: flex-start;
   padding-left: 15px;
   box-sizing: border-box;
-  box-shadow: 0 0 8px 1px rgba(53, 255, 179, 0.7);
+  box-shadow: 0 0 8px 1px rgba(247, 108, 145, 0.7);
 }
 
 .slanted-rectangle::before,
@@ -371,7 +390,7 @@ textarea {
   left: 0;
   width: 9px;
   height: 6px;
-  background-color: #ff8c00;
+  background-color: #F76C91;
 }
 
 .slanted-rectangle::after {
@@ -381,7 +400,7 @@ textarea {
   right: 12px;
   width: 2px;
   height: 24px;
-  background-color: #ff8c00;
+  background-color: #F76C91;
 }
 
 .slanted-rectangle-flip::after {
@@ -391,7 +410,7 @@ textarea {
   right: -56px;
   width: 56px;
   height: 2px;
-  background-color: #ff8c00;
+  background-color: #F76C91;
   transform: skewX(20deg);
   rotate: 20deg;
 }
@@ -425,15 +444,15 @@ textarea {
    ------------------------------------------------------------ */
 
 a {
-  color: #35ffb3;
+  color: #A77BC8;
 }
 
 a:visited {
-  color: #00e5ff;
+  color: #FF9562;
 }
 
 a:hover {
-  color: #ff2e88;
+  color: #F76C91;
 }
 
 #retro-nav {
@@ -451,11 +470,11 @@ a:hover {
 }
 
 .retro-marquee {
-  border-top: 1px dotted #3a3a5a;
-  border-bottom: 1px dotted #3a3a5a;
+  border-top: 1px dotted #A77BC8;
+  border-bottom: 1px dotted #A77BC8;
   margin: 8px 0 16px;
   padding: 3px 0;
-  color: #cba6f7;
+  color: #F76C91;
   font-size: 12px;
 }
 
@@ -463,8 +482,8 @@ a:hover {
   text-align: center;
   margin: 24px auto 40px;
   padding: 12px;
-  border-top: 1px dotted #3a3a5a;
-  color: #888888;
+  border-top: 1px dotted #A77BC8;
+  color: #A77BC8;
   font-size: 12px;
   line-height: 1.7;
   width: 900px;
@@ -479,9 +498,9 @@ a:hover {
 .hit-counter {
   display: inline-block;
   background-color: #000000;
-  border: 2px inset #c0c0c0;
+  border: 2px inset #A77BC8;
   padding: 1px 6px;
-  color: #35ffb3;
+  color: #FFC46B;
   letter-spacing: 2px;
   font-size: 14px;
 }
@@ -489,72 +508,25 @@ a:hover {
 .counter-digit {
   display: inline-block;
   background-color: #111111;
-  border: 1px solid #3a3a5a;
-  color: #35ffb3;
+  border: 1px solid #514B87;
+  color: #FFC46B;
   padding: 1px 4px;
   margin: 1px;
 }
 
-.site-profile {
-  text-align: center;
-  border: 2px inset #c0c0c0;
-  background-color: #000000;
-  padding: 8px;
-  font-size: 12px;
-}
-
-.profile-avatar {
-  width: 64px;
-  height: 64px;
-  border: 1px solid #3a3a5a;
-  image-rendering: pixelated;
-}
-
-.profile-name {
-  color: #cba6f7;
-  font-size: 18px;
-  margin-top: 4px;
-}
-
-.profile-handle {
-  color: #71717a;
-  font-size: 11px;
-  margin-bottom: 6px;
-}
-
-.profile-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 11px;
-}
-
-.profile-table th {
-  text-align: left;
-  color: #71717a;
-  border: 0;
-  padding: 2px 0;
-  font-weight: normal;
-}
-
-.profile-table td {
-  text-align: right;
-  border: 0;
-  padding: 2px 0;
-}
-
 .online-dot {
-  color: #35ffb3;
+  color: #FFC46B;
   animation: blink 1.2s steps(1) infinite;
 }
 
 .effect-links a {
-  color: #71717a;
+  color: #A77BC8;
 }
 
 .sparkle {
   position: fixed;
   z-index: 9999;
-  color: #35ffb3;
+  color: #FFC46B;
   font-size: 10px;
   pointer-events: none;
   animation: sparkleFade 0.7s linear forwards;
@@ -572,70 +544,6 @@ a:hover {
   }
 }
 
-#snow-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 3;
-  overflow: hidden;
-}
-
-.snowflake {
-  position: absolute;
-  top: -20px;
-  color: #ffffff;
-  text-shadow: 0 0 4px #cba6f7;
-  animation-name: snowFall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-@keyframes snowFall {
-  from {
-    transform: translateY(-20px);
-  }
-
-  to {
-    transform: translateY(105vh);
-  }
-}
-
-#rain-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 3;
-  overflow: hidden;
-}
-
-.raindrop {
-  position: absolute;
-  top: -30px;
-  color: #00e5ff;
-  font-family: monospace;
-  line-height: 1;
-  text-shadow: 0 0 3px #00e5ff;
-  animation-name: rainFall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-@keyframes rainFall {
-  from {
-    transform: translate(0, -30px) rotate(9deg);
-  }
-
-  to {
-    transform: translate(16vh, 105vh) rotate(9deg);
-  }
-}
-
 /* ------------------------------------------------------------
    subpage layout
    ------------------------------------------------------------ */
@@ -647,7 +555,7 @@ a:hover {
 
 .page-box {
   background-color: rgba(0, 0, 0, 0.65);
-  border: 2px dotted #3a3a5a;
+  border: 2px dotted #514B87;
   padding: 16px 24px;
   margin: 12px 0;
 }
@@ -679,7 +587,7 @@ a:hover {
 
 .page-box hr {
   border: 0;
-  border-top: 1px dotted #3a3a5a;
+  border-top: 1px dotted #514B87;
   margin: 16px 0;
 }
 
@@ -690,19 +598,19 @@ a:hover {
 .page-box td,
 .page-box th {
   padding: 4px 6px;
-  border-bottom: 1px dotted #2a2a3a;
+  border-bottom: 1px dotted #3A3563;
   vertical-align: top;
 }
 
 .page-box th {
-  color: #cba6f7;
+  color: #F76C91;
   text-align: left;
 }
 
 .page-box pre {
   background-color: #000000;
-  border: 1px solid #3a3a5a;
-  color: #35ffb3;
+  border: 1px solid #514B87;
+  color: #A77BC8;
   padding: 10px;
   overflow: auto;
   font-family: MS Gothic, monospace;
@@ -711,9 +619,9 @@ a:hover {
 }
 
 .construction {
-  background: repeating-linear-gradient(45deg, #2a2a00, #2a2a00 12px, #3a3a00 12px, #3a3a00 24px);
-  border: 2px solid #ffcc00;
-  color: #ffcc00;
+  background: repeating-linear-gradient(45deg, #2E1A12, #2E1A12 12px, #3E2418 12px, #3E2418 24px);
+  border: 2px solid #FF9562;
+  color: #FF9562;
   text-align: center;
   padding: 10px;
   margin: 12px 0;
@@ -739,18 +647,6 @@ a:hover {
 
 #random-banner img {
   image-rendering: pixelated;
-}
-
-.mood-box {
-  border: 2px inset #c0c0c0;
-  background-color: #000000;
-  padding: 8px;
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.mood-box strong {
-  color: #cba6f7;
 }
 
 .button-wall {
@@ -784,7 +680,7 @@ a:hover {
 .gif-wall figcaption,
 .gif-caption {
   font-size: 11px;
-  color: #888888;
+  color: #A77BC8;
 }
 
 /* ------------------------------------------------------------
@@ -792,7 +688,7 @@ a:hover {
    ------------------------------------------------------------ */
 
 .retro-form {
-  border: 2px inset #c0c0c0;
+  border: 2px inset #A77BC8;
   background-color: #0a0a0a;
   padding: 10px;
   margin: 12px 0;
@@ -801,7 +697,7 @@ a:hover {
 .retro-form label {
   display: block;
   font-size: 12px;
-  color: #cba6f7;
+  color: #F76C91;
   margin-top: 8px;
 }
 
@@ -811,7 +707,7 @@ a:hover {
   width: 95%;
   background-color: #000000;
   color: #ffffff;
-  border: 1px solid #3a3a5a;
+  border: 1px solid #514B87;
   font-family: "04b_03";
   font-size: 14px;
   padding: 4px;
@@ -823,13 +719,11 @@ a:hover {
 }
 
 .retro-form button,
-.pet-actions button,
-.poll-form button,
 .shout-form button {
   margin-top: 8px;
   background-color: #222222;
-  color: #35ffb3;
-  border: 2px outset #c0c0c0;
+  color: #A77BC8;
+  border: 2px outset #A77BC8;
   font-family: "04b_03";
   font-size: 14px;
   padding: 4px 12px;
@@ -837,8 +731,6 @@ a:hover {
 }
 
 .retro-form button:active,
-.pet-actions button:active,
-.poll-form button:active,
 .shout-form button:active {
   border-style: inset;
 }
@@ -851,7 +743,7 @@ a:hover {
   width: 95%;
   background-color: #000000;
   color: #ffffff;
-  border: 1px solid #3a3a5a;
+  border: 1px solid #514B87;
   font-family: "04b_03";
   font-size: 12px;
   padding: 2px;
@@ -868,12 +760,12 @@ a:hover {
    ------------------------------------------------------------ */
 
 .gb-entry {
-  border-bottom: 1px dotted #3a3a5a;
+  border-bottom: 1px dotted #514B87;
   padding: 8px 0;
 }
 
 .gb-entry .gb-meta {
-  color: #71717a;
+  color: #A77BC8;
   font-size: 11px;
 }
 
@@ -893,233 +785,21 @@ a:hover {
 }
 
 .shoutbox-entry {
-  border-bottom: 1px dotted #3a3a5a;
+  border-bottom: 1px dotted #514B87;
   padding: 4px 0;
 }
 
 .shoutbox-entry .shout-time {
-  color: #71717a;
+  color: #A77BC8;
   font-size: 10px;
 }
 
 /* ------------------------------------------------------------
-   poll
+   live badge
    ------------------------------------------------------------ */
-
-.poll-row {
-  margin: 6px 0;
-}
-
-.poll-label {
-  font-size: 12px;
-}
-
-.poll-label span:first-child {
-  display: inline-block;
-  width: 70px;
-}
-
-.poll-count {
-  color: #71717a;
-}
-
-.poll-bar {
-  height: 14px;
-  background-color: #35ffb3;
-  box-shadow: 0 0 4px #35ffb3;
-  margin-top: 2px;
-  min-width: 1px;
-}
-
-.poll-form label {
-  display: block;
-  font-size: 12px;
-  margin: 3px 0;
-}
-
-.poll-thanks {
-  color: #35ffb3;
-  font-size: 12px;
-}
-
-/* ------------------------------------------------------------
-   winamp player
-   ------------------------------------------------------------ */
-
-.winamp {
-  width: 360px;
-  background-color: #1a1a1a;
-  border: 2px outset #c0c0c0;
-  padding: 6px;
-  margin: 12px auto;
-  font-size: 11px;
-}
-
-.winamp-title {
-  background: linear-gradient(90deg, #000080, #1084d0);
-  color: #ffffff;
-  padding: 2px 6px;
-  font-size: 12px;
-}
-
-.winamp-screen {
-  background-color: #000000;
-  border: 2px inset #c0c0c0;
-  color: #35ffb3;
-  padding: 6px;
-  margin: 6px 0;
-  font-family: monospace;
-  font-size: 12px;
-}
-
-.winamp-controls {
-  text-align: center;
-  margin: 4px 0;
-}
-
-.winamp-controls button {
-  background-color: #333333;
-  color: #dddddd;
-  border: 2px outset #c0c0c0;
-  font-size: 11px;
-  padding: 2px 8px;
-  margin: 0 2px;
-  cursor: pointer;
-}
-
-.winamp-controls button:active {
-  border-style: inset;
-}
-
-.winamp-eq {
-  text-align: center;
-  height: 28px;
-  padding-top: 2px;
-}
-
-#winamp-visualizer {
-  display: block;
-  width: 100%;
-  height: 40px;
-  background-color: #000000;
-  border: 1px solid #333333;
-  margin: 4px 0;
-}
-
-.eq-bar {
-  display: inline-block;
-  width: 4px;
-  height: 10px;
-  background-color: #35ffb3;
-  margin: 1px;
-  vertical-align: bottom;
-}
-
-.winamp-playing .eq-bar {
-  animation: eqBounce 0.4s infinite alternate;
-}
-
-@keyframes eqBounce {
-  from {
-    height: 4px;
-  }
-
-  to {
-    height: 24px;
-  }
-}
-
-/* ------------------------------------------------------------
-   virtual pet
-   ------------------------------------------------------------ */
-
-.pet-stage {
-  text-align: center;
-  border: 2px inset #c0c0c0;
-  background-color: #000000;
-  padding: 12px;
-  margin: 12px 0;
-}
-
-.pet-stage img {
-  max-width: 160px;
-  image-rendering: pixelated;
-}
-
-.pet-stats {
-  margin: 10px auto;
-  width: 280px;
-  text-align: left;
-  font-size: 12px;
-}
-
-.pet-stat {
-  margin: 4px 0;
-}
-
-.pet-stat .bar {
-  display: inline-block;
-  height: 10px;
-  background-color: #ff2e88;
-  vertical-align: middle;
-}
-
-.pet-actions {
-  text-align: center;
-}
-
-.pet-actions button {
-  margin: 2px;
-}
-
-/* ------------------------------------------------------------
-   quiz
-   ------------------------------------------------------------ */
-
-.quiz-question {
-  border: 1px dotted #3a3a5a;
-  padding: 8px;
-  margin: 8px 0;
-}
-
-.quiz-question label {
-  display: block;
-  font-size: 13px;
-  margin: 2px 0;
-}
-
-.quiz-result {
-  text-align: center;
-  border: 2px solid #cba6f7;
-  padding: 12px;
-  margin-top: 12px;
-}
-
-.quiz-result img {
-  max-width: 180px;
-  image-rendering: pixelated;
-  margin: 8px 0;
-}
-
-/* ------------------------------------------------------------
-   webcam
-   ------------------------------------------------------------ */
-
-.webcam-frame {
-  text-align: center;
-  border: 4px solid #3a3a5a;
-  background-color: #000000;
-  padding: 8px;
-  margin: 12px 0;
-}
-
-.webcam-frame img {
-  width: 100%;
-  image-rendering: pixelated;
-}
 
 .live-badge {
-  color: #ff2e88;
+  color: #F76C91;
   animation: blink 1s steps(1) infinite;
 }
 
@@ -1130,45 +810,52 @@ a:hover {
 }
 
 /* ------------------------------------------------------------
-   links / awards / downloads
+   twin peaks red room easter egg
    ------------------------------------------------------------ */
 
-.webring {
-  border: 2px dotted #cba6f7;
-  background-color: #0a0010;
-  text-align: center;
-  padding: 10px;
-  margin: 12px 0;
-}
-
-.webring a {
-  margin: 0 6px;
-}
-
-.award {
-  border: 2px dotted #cba6f7;
-  padding: 8px;
-  margin: 8px 0;
+#red-room {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  display: none;
+  overflow-y: auto;
+  padding: 40px 16px;
+  background: repeating-linear-gradient(90deg, #1a0306, #1a0306 18px, #3a0810 18px, #3a0810 36px);
   text-align: center;
 }
 
-.award img {
+.red-room-box {
+  width: 420px;
+  max-width: 90%;
+  margin: 24px auto;
+  padding: 16px;
+  background-color: #0a0304;
+  border: 3px double #A83246;
+  box-shadow: 0 0 30px #A83246;
+}
+
+.red-room-box img {
+  width: 100%;
+  max-width: 320px;
+  border: 2px solid #F5EDE0;
   image-rendering: pixelated;
-  vertical-align: middle;
 }
 
-.download-list li {
-  margin: 6px 0;
+.red-room-kicker {
+  color: #FFC46B;
+  font-size: 12px;
 }
 
-.top8 td {
-  font-size: 13px;
+.red-room-box p {
+  color: #F5EDE0;
+  line-height: 1.7;
 }
 
-.top8 .top8-number {
-  font-size: 22px;
-  color: #71717a;
-  width: 30px;
+.red-room-box a {
+  color: #FFC46B;
 }
 
 /* ------------------------------------------------------------

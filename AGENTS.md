@@ -23,13 +23,13 @@ Signals that must be preserved:
 
 - Fixed-width 1250px, centered three-column `<table>` layout. No responsive design.
 - Pixel bitmap font `04b_03` from `/fonts/04B_03__.TTF`, with a hard black `text-shadow` outline.
-- Tiled `images/bluecore-1.jpg` background, `background-attachment: fixed`.
+- Repeating background image (currently `images/water.gif`) with a neutral dark wash, `background-attachment: fixed`.
 - Scanline and flicker overlays via `body::before` / `body::after`.
 - Dense decoration: blinkies, 88x31 buttons, GIFs, star backgrounds, the "site button" copy-paste `<textarea>`.
-- Community furniture: hit counter, guestbook, shoutbox, poll, webring, top 8, awards, "under construction".
-- Neocities furniture: profile/stats box, odometer counter, Neocities 88x31 badge, `/now` page, journal RSS feed, "spiritually yes" disclaimer.
-- Toys and media: virtual pet, quiz, fake webcam, marquee, Winamp-style chiptune player.
-- Palette: black, purple `#cba6f7`, neon green `#35ffb3`, cyan `#00e5ff`, hot pink `#ff2e88`, highlight yellow `#ffcc00`, lavender-white text `#dcd6f7`, blue-gray borders `#3a3a5a` and silver bevels `#c0c0c0`. Component accents stay: orange `#ff8c00` (Eva slants) and Spotify green `#1db954`.
+- Community furniture: hit counter, guestbook, shoutbox, "under construction".
+- Neocities furniture: odometer counter, Neocities 88x31 badge, `/now` page, "spiritually yes" disclaimer.
+- Toys and media: marquee.
+- Palette: Vice City sunset — pink `#F76C91`, coral `#FF9562`, amber `#FFC46B`, purple `#A77BC8`, deep purple `#514B87`. Dark panels and neon accents over the repeating trees.gif background. The Forest and Double R Diner palettes are archived in `PALETTES.md`.
 - Chunky custom components (the vinyl record widget) over clean, minimal UI.
 - Personal, lowercase, casual voice ("Hi! I'm a Webmaster based in Brazil").
 
@@ -83,7 +83,6 @@ Do not "fix" something just because it is invalid HTML, unused, duplicated or un
 - Keep the palette, the `04b_03` font and the existing visual language.
 - Period-appropriate effects: tiled backgrounds, `text-shadow`, chunky borders, scanlines, `@keyframes` flicker/spin, the `linear-gradient` already used.
 - **Grandfathered modern CSS:** `flex`/`gap` in `.vinyl-container`, `#slanted-rectangles-container`, `.slanted-rectangle*`, `#regular-column`, `#flipped-column`, plus the `rotate` property and `calc(infinity * 1px)` in the vinyl/slanted components. Do not spread these techniques to new layout, and do not "clean them up" either.
-- **Grandfathered modern APIs:** the Winamp analyser uses `<canvas>` and Web Audio. The UI is a period Winamp skin; keep it that way and do not use it as a precedent for other frontend work.
 - No CSS variables. No grid. No media queries unless the user explicitly asks for mobile work.
 - 2-space indentation is the existing style in this file.
 
@@ -102,14 +101,13 @@ Do not "fix" something just because it is invalid HTML, unused, duplicated or un
 
 `src/index.js` is a Cloudflare Worker. It may use ESM, `async` / `await`, `fetch`, optional chaining and other modern JS because it never ships to the browser. The same applies to `wrangler.jsonc`, `package.json`, `scripts/`, `.dev.vars`, deployment configuration and `README.md`.
 
-- Keep the API surface stable: Spotify routes (`/currently-playing`, `/recently-played`, `/top-artists`, `/top-tracks`), community routes (`/api/counter`, `/api/guestbook`, `/api/shoutbox`, `/api/poll`) and the optional `/api/lastfm`. Every route also works without the `/api/` prefix.
+- Keep the API surface stable: Spotify routes (`/currently-playing`, `/recently-played`, `/top-artists`, `/top-tracks`), community routes (`/api/counter`, `/api/guestbook`, `/api/shoutbox`). Every route also works without the `/api/` prefix.
 - Keep response shapes identical. The frontend consumes them with synchronous/async `XMLHttpRequest`.
 - Server-side improvements (token caching, error handling, mock data, headers) are welcome.
 - Never move Spotify calls or credentials into `public/`.
 - `MOCK_SPOTIFY=true` in `.dev.vars` serves bundled sample data. Use it for visual work without credentials.
-- Community data lives in D1. The schema is `db/schema.sql` (`counter`, `guestbook`, `shoutbox`, `poll_votes`). Keep the schema idempotent (`CREATE TABLE IF NOT EXISTS`, `INSERT OR IGNORE`).
-- Validate all form input: length caps, option whitelist for the poll, honeypot field `url2`, and no HTML trust. Escape messages on the client when rendering.
-- The Last.fm route stays optional: return `503` with a readable message when `LASTFM_API_KEY` / `LASTFM_USER` are missing.
+- Community data lives in D1. The schema is `db/schema.sql` (`counter`, `guestbook`, `shoutbox`). Keep the schema idempotent (`CREATE TABLE IF NOT EXISTS`, `INSERT OR IGNORE`).
+- Validate all form input: length caps, honeypot field `url2`, and no HTML trust. Escape messages on the client when rendering.
 
 ### Accepted anachronisms
 
@@ -169,6 +167,6 @@ node --check public/retro.js
 - No new modern layout primitives in CSS outside the grandfather clause.
 - No new dependencies, build steps, fonts or CDNs.
 - Spotify works with real credentials and with `MOCK_SPOTIFY=true`.
-- Guestbook, shoutbox, poll and counter work locally and in production.
+- Guestbook, shoutbox and counter work locally and in production.
 - Unknown paths render the custom 404 page.
 - `README.md` stays accurate for humans; this file stays accurate for agents.

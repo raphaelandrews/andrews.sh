@@ -7,20 +7,22 @@ Personal cybercore website for [andrews.sh](https://andrews.sh). A static site, 
 ## Stack
 
 - **Cloudflare Workers** – serves the static assets and the API from one deployment
-- **Cloudflare D1** – hit counter, guestbook, shoutbox and poll
+- **Cloudflare D1** – hit counter, guestbook and shoutbox
 - **Wrangler** – local dev server and deployment
 - **Vanilla HTML/CSS/JS** – no build step
 - **Spotify Web API** – currently playing, recently played, top artists and top tracks
-- **Last.fm (optional)** – recently scrobbled widget
 
 ## What's on the site
 
-- **Retro chrome** – top navigation, marquee, odometer hit counter, random 88x31 banner, mood box, sparkle trail, snow toggle and rain toggle.
-- **Neocities spirit** – profile/stats box, Neocities footer badge, "spiritually yes" note, `/now` page and an RSS feed. The site is not hosted on Neocities; it just wishes it were.
+- **Retro chrome** – top navigation, marquee, odometer hit counter, random 88x31 banner, sparkle trail.
+- **Neocities spirit** – Neocities footer badge, "spiritually yes" note and a `/now` page. The site is not hosted on Neocities; it just wishes it were.
 - **Spotify** – vinyl widgets for currently playing, recently played, top artists and top tracks.
-- **Community** – guestbook, shoutbox and an OS poll, stored in D1.
-- **Toys** – virtual cat, Evangelion quiz, fake webcam, Winamp-style chiptune player.
-- **Pages** – about, now, journal, music, anime, setup, buttons, links, downloads, GIF wall, awards, FAQ, site map and credits.
+- **Community** – guestbook and shoutbox, stored in D1.
+- **Pages** – about, now, music, buttons, GIF wall and site map.
+
+## Palette history
+
+The current palette and archived previous palettes are documented in [PALETTES.md](PALETTES.md).
 
 ## Project structure
 
@@ -53,9 +55,6 @@ All routes return JSON. The Spotify routes are `GET`; the community routes also 
 | POST   | `/api/guestbook`       | Sign the guestbook (`name`, `website`, `message`) |
 | GET    | `/api/shoutbox`        | Latest 20 shouts                         |
 | POST   | `/api/shoutbox`        | Post a shout (`name`, `message`)         |
-| GET    | `/api/poll`            | Poll options and vote counts             |
-| POST   | `/api/poll`            | Vote (`option`: linux, windows, macos, bsd, other) |
-| GET    | `/api/lastfm`          | Recent scrobbles, or `503` when unconfigured |
 
 Every route is also available without the `/api/` prefix (for example `/top-tracks` and `/guestbook`). Unknown browser paths render the custom `404.html`.
 
@@ -114,17 +113,6 @@ npx wrangler secret put SPOTIFY_REFRESH_TOKEN
 
 Repeat roughly every six months. The request scopes are `user-read-currently-playing`, `user-read-recently-played` and `user-top-read`.
 
-### Last.fm (optional)
-
-The music page shows a "recently scrobbled" widget when these are set:
-
-```dotenv
-LASTFM_API_KEY=...
-LASTFM_USER=...
-```
-
-Without them the widget shows a friendly "Last.fm is sleeping" message.
-
 ## Deployment
 
 Authenticate Wrangler once:
@@ -140,8 +128,6 @@ npx wrangler secret put SPOTIFY_CLIENT_ID
 npx wrangler secret put SPOTIFY_CLIENT_SECRET
 npx wrangler secret put SPOTIFY_REFRESH_TOKEN
 ```
-
-Add the optional Last.fm credentials the same way (`LASTFM_API_KEY`, `LASTFM_USER`).
 
 Create the D1 database and apply the schema once:
 
@@ -181,3 +167,4 @@ If you connect the repository to Cloudflare, configure a Workers Build with:
 - **Root directory:** the repository root
 
 Set `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET` and `SPOTIFY_REFRESH_TOKEN` as secrets/variables in the build settings. The D1 binding comes from `wrangler.jsonc`; apply `db/schema.sql` to the production database separately.
+

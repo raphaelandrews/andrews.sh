@@ -446,63 +446,6 @@ async function createShoutbox(request, env) {
 	return { ok: true };
 }
 
-const POLL_OPTIONS = ['linux', 'windows', 'macos', 'bsd', 'other'];
-
-async function getPoll(_request, env) {
-	const { results } = await env.DB.prepare('SELECT option, votes FROM poll_votes').all();
-	return { options: results || [] };
-}
-
-async function votePoll(request, env) {
-	const form = await readForm(request);
-	const option = cleanText(form.get('option'), 20);
-
-	if (!POLL_OPTIONS.includes(option)) {
-		throw new HttpError(400, 'Unknown poll option.');
-	}
-
-	await env.DB.prepare('UPDATE poll_votes SET votes = votes + 1 WHERE option = ?')
-		.bind(option)
-		.run();
-
-	return getPoll(request, env);
-}
-
-async function getLastFm(_request, env) {
-	const apiKey = env.LASTFM_API_KEY;
-	const user = env.LASTFM_USER;
-
-	if (!apiKey || !user) {
-		throw new HttpError(503, 'Last.fm is not configured.');
-	}
-
-	const url = new URL('https://ws.audioscrobbler.com/2.0/');
-	url.search = new URLSearchParams({
-		method: 'user.getrecenttracks',
-		user,
-		api_key: apiKey,
-		format: 'json',
-		limit: '5'
-	}).toString();
-
-	const response = await fetch(url);
-	if (!response.ok) {
-		throw new Error(`Last.fm error: ${response.status}`);
-	}
-
-	const data = await response.json();
-	const tracks = (data.recenttracks?.track || []).map((track) => ({
-		name: track.name,
-		artist: track.artist?.['#text'] || '',
-		album: track.album?.['#text'] || '',
-		image: track.image?.find((image) => image.size === 'medium')?.['#text'] || '',
-		url: track.url || '',
-		nowPlaying: track['@attr']?.nowplaying === 'true'
-	}));
-
-	return { tracks };
-}
-
 const routes = {
 	'/currently-playing': { GET: getCurrentlyPlaying },
 	'/recently-played': { GET: getRecentlyPlayed },
@@ -510,9 +453,7 @@ const routes = {
 	'/top-tracks': { GET: getTopTracks },
 	'/counter': { GET: incrementCounter },
 	'/guestbook': { GET: listGuestbook, POST: createGuestbook },
-	'/shoutbox': { GET: listShoutbox, POST: createShoutbox },
-	'/poll': { GET: getPoll, POST: votePoll },
-	'/lastfm': { GET: getLastFm }
+	'/shoutbox': { GET: listShoutbox, POST: createShoutbox }
 };
 
 export default {
